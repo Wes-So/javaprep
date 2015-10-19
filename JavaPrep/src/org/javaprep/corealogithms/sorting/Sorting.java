@@ -36,29 +36,65 @@ public class Sorting {
 			} 
 		} 
 	}
-
+	
+	@Test
+	public void testBubbleSortArray(){
+		final int[] numbers = {4,2,1,6,3,5,4};
+		final int[] expected = {1,2,3,4,4,5,6};
+		
+		bubbleSortArray(numbers);
+		
+		assertEquals(Arrays.toString(expected),Arrays.toString(numbers));
+		
+	}
+	
+	public void bubbleSortArray(int[] numbers){
+		boolean stillUnsorted = true;
+		
+		while(stillUnsorted){
+			stillUnsorted = false;
+			for(int i = 0; i < numbers.length -1; i++){				
+				if(numbers[i + 1] < numbers[i]){
+					int temp = numbers[i];					
+					numbers[i] = numbers[i+ 1];
+					numbers[i + 1] = temp;
+					stillUnsorted = true;
+				} 
+			} 
+		}
+	}
+	
 	@Test
 	public void testInsertSort(){
 		final List<Integer> numbers = Arrays.asList(4,2,1,6,3,5,4);
 		final List<Integer> expected = Arrays.asList(1,2,3,4,4,5,6);
 		
-		List newNumbers = insertSort(numbers);		
-		assertEquals(expected,newNumbers);		
+		ArrayList<Integer> newArrayList = insertSort(numbers);
+		
+		assertEquals(expected,newArrayList);		
 	}
-	
-	public List insertSort(List<Integer> numbers){
-		//TODO: hack of insert sort until we learn sortedLinkedList
-		List<Integer> newList = new ArrayList<Integer>();
+		
+	public ArrayList<Integer> insertSort(List<Integer> numbers){
+		 
+		ArrayList<Integer> newArrayList = new ArrayList<Integer>();
+		
 		for(int i = 0; i < numbers.size(); i++){
-			newList.add(numbers.get(i));
-			bubbleSort(newList);  
-		}
-		System.out.println(newList);
-		return newList;  
-	}	
-	
-
-	
-	
-	
+			if(newArrayList.size() == 0){
+				newArrayList.add(numbers.get(i));
+			} else {
+				int newArrayListSize = newArrayList.size();
+				for(int k = 0; k < newArrayListSize; k++){
+					if(numbers.get(i) <= newArrayList.get(k)  ){
+						newArrayList.add(k,numbers.get(i));
+						break;
+					}
+				}
+				
+				if(newArrayList.size() == newArrayListSize){
+					newArrayList.add(numbers.get(i));					
+				}
+			}  
+		}		
+		return newArrayList;
+	}		
 }
