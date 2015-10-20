@@ -1,6 +1,6 @@
 package org.javaprep.corealogithms.sorting;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,5 +96,52 @@ public class Sorting {
 			}  
 		}		
 		return newArrayList;
-	}		
+	}	
+	
+	@Test
+	public void testQuickSort(){
+		final List<Integer> numbers = Arrays.asList(4,2,1,6,3,5,4);
+		final List<Integer> expected = Arrays.asList(1,2,3,4,4,5,6);
+		
+		List<Integer> newArrayList = quickSort(numbers);
+		
+		assertEquals(expected,newArrayList);		
+	}
+	
+	@Test
+	public void whenSizeIsLessThanTwoThenReturnList(){
+		final List<Integer> numbers = Arrays.asList(4);
+		final List<Integer> expected = Arrays.asList(4);
+		
+		List<Integer> newArrayList = quickSort(numbers);
+		
+		assertEquals(expected,newArrayList);		
+	}	
+		
+	public List<Integer> quickSort(List<Integer> numbers){
+		 if(numbers.size() < 2){
+			 return numbers;
+		 }
+		 
+		 final int pivot = numbers.get(0);
+		 
+		 final List<Integer> lowerList = new ArrayList<Integer>();
+		 final List<Integer> higherList = new ArrayList<Integer>();
+		 for(int i = 1; i < numbers.size(); i++){
+			 if(numbers.get(i) < pivot){
+				 lowerList.add(numbers.get(i));
+			 } else {
+				 higherList.add(numbers.get(i));
+			 }
+		 }
+
+		 final List<Integer> sortedLowerList = quickSort(lowerList);		
+		 
+		 sortedLowerList.add(pivot);
+		 sortedLowerList.addAll(quickSort(higherList));
+
+		return sortedLowerList;
+	}
+
+ 
 }
