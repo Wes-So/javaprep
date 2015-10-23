@@ -143,5 +143,74 @@ public class Sorting {
 		return sortedLowerList;
 	}
 
+	@Test
+	public void testMergeSort(){
+		final List<Integer> numbers = Arrays.asList(4,2,1,6,3,5,4);
+		final List<Integer> expected = Arrays.asList(1,2,3,4,4,5,6);
+		
+		List<Integer> newArrayList = mergeSort(numbers);
+		System.out.println(newArrayList);
+		assertEquals(expected,newArrayList);		
+	} 
+	
+	private List<Integer> getLowerList(int middleIndex,List<Integer> numbers){
+		ArrayList<Integer> lowerList = new ArrayList<Integer>();
+		for(int i = 0; i < middleIndex; i++ ){
+			lowerList.add(numbers.get(i));
+		} 
+		return lowerList;
+	}
+	
+	private List<Integer> getUpperList(int middleIndex,List<Integer> numbers){
+		ArrayList<Integer> upperList = new ArrayList<Integer>();
+		for(int i = middleIndex; i < numbers.size(); i++ ){
+			upperList.add(numbers.get(i));
+		} 
+		return upperList;
+	}
+	
+	private List<Integer> merge(List<Integer> sortedLowerList,List<Integer> sortedHigherList){
+		int leftPtr = 0;
+		int rightPtr = 0;
+		ArrayList<Integer> newList = new ArrayList<Integer>();
+		
+		
+		while(leftPtr < sortedLowerList.size() && rightPtr < sortedHigherList.size()){
+			if(sortedLowerList.get(leftPtr) < sortedHigherList.get(rightPtr)){
+				newList.add(sortedLowerList.get(leftPtr));
+				leftPtr++;
+			} else {
+				newList.add(sortedHigherList.get(rightPtr));
+				rightPtr++; 
+			}
+		}
+		
+		while(leftPtr < sortedLowerList.size()){
+			newList.add(sortedLowerList.get(leftPtr));
+			leftPtr++; 
+		}
+		
+		while(rightPtr < sortedHigherList.size()){
+			newList.add(sortedHigherList.get(rightPtr));
+			rightPtr++; 
+		}		
+		
+		return newList;
+		 
+	}
+	
+	public List<Integer> mergeSort(List<Integer> numbers){
+		 if(numbers.size() < 2){
+			 return numbers;
+		 }
+		 
+		 final int middleIndex = numbers.size()/2;
+		 final List<Integer> lowerList = getLowerList(middleIndex,numbers);
+		 final List<Integer> higherList = getUpperList(middleIndex,numbers);
+		 final List<Integer> sortedLowerList = mergeSort(lowerList);
+		 final List<Integer> sortedHigherList = mergeSort(higherList);
  
+		return merge(sortedLowerList,sortedHigherList);
+	}	
+	
 }
