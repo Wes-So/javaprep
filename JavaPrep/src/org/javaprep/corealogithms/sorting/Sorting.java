@@ -21,6 +21,10 @@ public class Sorting {
 		
 	}
 	
+	/* Worst Case O(n2) when you want to sort a list that is already sorted in reverse order
+	 * Best Case O(n) when a list is already sorted as you only make one pass through the list
+	 * Compare two elements in an array and repeat until no elements are switched.
+	 */
 	public void bubbleSort(List<Integer> numbers){
 		boolean stillUnsorted = true;
 		
@@ -73,7 +77,11 @@ public class Sorting {
 		
 		assertEquals(expected,newArrayList);		
 	}
-		
+	
+	/* Worst Case: 0(n2) when you sort an already-sorted list, you need to iterate to the end of the new list with each element to insert
+	 * Best Case: O(n) when  you sort a reverse-order list, you will be putting each element into the new list at the head of the list
+	 */
+	
 	public ArrayList<Integer> insertSort(List<Integer> numbers){
 		 
 		ArrayList<Integer> newArrayList = new ArrayList<Integer>();
@@ -117,7 +125,10 @@ public class Sorting {
 		
 		assertEquals(expected,newArrayList);		
 	}	
-		
+	
+	/* Worst Case: O(n2)
+	 * Best Case: O(n log n)
+	 */
 	public List<Integer> quickSort(List<Integer> numbers){
 		 if(numbers.size() < 2){
 			 return numbers;
@@ -199,6 +210,9 @@ public class Sorting {
 		 
 	}
 	
+	/* Worst Case: O(n2)
+	 * Best Case: O(n log n)
+	 */
 	public List<Integer> mergeSort(List<Integer> numbers){
 		 if(numbers.size() < 2){
 			 return numbers;
