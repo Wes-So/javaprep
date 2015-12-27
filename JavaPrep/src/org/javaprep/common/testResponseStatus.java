@@ -7,6 +7,10 @@ import org.junit.Test;
 public class testResponseStatus {
 		@Test
 		public void getResponseStatus(){
+			
+			assertEquals("SUCCESS",Common.Success.getValue());
+			assertEquals("ERROR",Common.Error.getValue());
+			
 			assertEquals("ERROR",Constants.Status.ERROR.getValue());
 			assertEquals("SUCCESS",Constants.Status.SUCCESS.getValue());
 		}
